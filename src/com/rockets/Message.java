@@ -1,7 +1,7 @@
 package com.rockets;
 
 public class Message {
-    private String header;      // message header, contains destination or timespan if topic is specified
+    private String header;      // message header, contains destination or timespan (in seconds) if topic is specified
 
     private String content;     // message content
 
@@ -30,6 +30,10 @@ public class Message {
 
     public String getMessage() {
         return content;
+    }
+
+    public String getTopic() {
+        return topic;
     }
 
     public String toString() {
