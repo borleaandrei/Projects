@@ -8,29 +8,88 @@ public class Test {
     public static void main(String[] args) {
         Topics topics = new Topics();
 
-        try {
-            topics.publishMessage(new TopicMessage("7", "cotent", "topic"));
-            Thread.sleep(1000);
-            topics.publishMessage(new TopicMessage("7", "cotent1", "topic"));
-            Thread.sleep(1000);
-            topics.publishMessage(new TopicMessage("7", "cotent2", "topic"));
-            Thread.sleep(1000);
-            topics.publishMessage(new TopicMessage("7", "cotent3", "topic"));
-            Thread.sleep(1000);
+        Thread thread1 = new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-            int i = 0;
+                try {
+                    topics.publishMessage(new TopicMessage("7", "cotent1 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent2 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent3 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent4 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent5 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent6 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent7 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(1000);
+                    topics.publishMessage(new TopicMessage("7", "cotent8 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(1000);
 
-            while (i < 15) {
-                System.out.println(topics.getMessages("topic", -1).toString());
-                i++;
-                Thread.sleep(500);
+                    int i = 0;
+
+                    while (i < 15) {
+                        System.out.println(topics.getMessages("topic", -1).toString());
+                        i++;
+                        Thread.sleep(500);
+                    }
+
+                    topics.stopTopicsVeirifcation();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
             }
+        });
 
-            topics.stopTopicsVeirifcation();
+        Thread thread2 = new Thread(new Runnable() {
+            @Override
+            public void run() {
 
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+                try {
+                    topics.publishMessage(new TopicMessage("7", "cotent1 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent2 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent3 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent4 from "+Thread.currentThread(), "topic1"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent5 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent6 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent7 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("7", "cotent8 from "+Thread.currentThread(), "topic2"));
+                    Thread.sleep(700);
+
+
+                    int i = 0;
+
+                    while (i < 15) {
+                        System.out.println(topics.getMessages("topic", -1).toString());
+                        i++;
+                        Thread.sleep(500);
+                    }
+
+                    topics.stopTopicsVeirifcation();
+
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+            }
+        });
+
+        thread1.start();
+        thread2.start();
+
 
     }
 }

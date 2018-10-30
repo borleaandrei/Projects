@@ -2,7 +2,9 @@ package com.rockets.topics;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.*;
 import java.util.stream.Collectors;
 
@@ -54,7 +56,7 @@ public class Topics {
                 if (topic == null) {
                     topic = new LinkedBlockingQueue<>();
                     topics.put(message.getTopic(), topic);
-                    scheduledExecutorService.scheduleWithFixedDelay(new VerifyExpiredTopicMessages("topic"), 0, 1, TimeUnit.SECONDS);
+                    scheduledExecutorService.scheduleWithFixedDelay(new VerifyExpiredTopicMessages(message.getTopic()), 0, 1, TimeUnit.SECONDS);
                 }
             }
 
@@ -81,4 +83,13 @@ public class Topics {
         scheduledExecutorService.shutdown();
     }
 
+    @Override
+    public String toString() {
+        Iterator<Map.Entry<String,BlockingQueue<TopicMessage>>>  it = topics.entrySet().iterator();
+
+        while(it.hasNext()){
+            Map.Entry<String, BlockingQueue<TopicMessage>> entry = it.next();
+            entry.getValue().stream().flatMap((m, acc) -> m + acc)
+        }
+    }
 }
