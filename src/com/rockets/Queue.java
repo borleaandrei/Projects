@@ -9,8 +9,6 @@ public class Queue {
                                             // which message goes to which queue will be decided by the Broker,
                                             // using this field
 
-    private static int maxLength = 15;      // maximum number of messages to be put in queues
-
 
     public Queue(String d) {
         this.messages = new ArrayList<Message>();
@@ -19,15 +17,13 @@ public class Queue {
 
     // adds message to queue
     public void add(Message message) {
-        if (messages.size() < maxLength)
-            messages.add(message);
-        // TODO else wait to be added
+        messages.add(message);
     }
-
-    public void deleteMessage(int brokerTime) {
-        // TODO: delete message after time
-    }
-
+//
+//    public void deleteMessage(int brokerTime) {
+//        // TODO: delete message after time
+//    }
+//
 
     public String toString() {
         String ret = "";
@@ -35,5 +31,9 @@ public class Queue {
             ret += m.toString();
         }
         return ret;
+    }
+
+    public String getDestination() {
+        return this.destination;
     }
 }
