@@ -10,11 +10,17 @@ public class TopicMessage extends Message {
 
     public TopicMessage(String h, String c, String t) {
         super(h, c, t);
-        long nrSeconds = Long.parseLong(h);
-        expirationTime = LocalDateTime.now().plusSeconds(nrSeconds);
     }
 
     public LocalDateTime getExpirationTime() {
         return expirationTime;
+    }
+
+    public void setExpirationTime(Long maxMessageLifeTime){
+        long nrSeconds = Long.parseLong(getHeader());
+        if(nrSeconds > maxMessageLifeTime)
+            nrSeconds = maxMessageLifeTime;
+
+        expirationTime = LocalDateTime.now().plusSeconds(nrSeconds);
     }
 }

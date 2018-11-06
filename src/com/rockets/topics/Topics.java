@@ -10,6 +10,8 @@ import java.util.stream.Collectors;
 
 public class Topics {
 
+    public static final long MAXIMUM_MESSAGE_LIFETIME = 60 ; //in seconds
+
     private class VerifyExpiredTopicMessages implements Runnable {
 
         private String topicName;
@@ -48,7 +50,7 @@ public class Topics {
 
     public void publishMessage(TopicMessage message) {
         BlockingQueue<TopicMessage> topic = topics.get(message.getTopic());
-
+        message.setExpirationTime(MAXIMUM_MESSAGE_LIFETIME);
         //if the topic does not exist already, then we create it
         if (topic == null)
             synchronized (this) {
@@ -70,6 +72,8 @@ public class Topics {
     public List<TopicMessage> getMessages(String topicName, Integer numberOfTopicMessages) {
         BlockingQueue<TopicMessage> topic = topics.get(topicName);
 
+        if(topic == null)
+            return null;
         Object[] objTopicMessages = topic.toArray();
         List<TopicMessage> messages = Arrays.stream(objTopicMessages).map(m -> (TopicMessage) m).collect(Collectors.toList());
 
@@ -79,7 +83,7 @@ public class Topics {
             return messages.subList(messages.size() - numberOfTopicMessages, messages.size());
     }
 
-    public void stopTopicsVeirifcation() {
+    public void stopTopicsVerifcation() {
         scheduledExecutorService.shutdown();
     }
 
@@ -87,9 +91,12 @@ public class Topics {
     public String toString() {
         Iterator<Map.Entry<String,BlockingQueue<TopicMessage>>>  it = topics.entrySet().iterator();
 
+        String messages = "";
         while(it.hasNext()){
             Map.Entry<String, BlockingQueue<TopicMessage>> entry = it.next();
-            entry.getValue().stream().flatMap((m, acc) -> m + acc)
+            messages = messages +" | " + entry.getValue().stream().map(m -> m.toString()).reduce((m, acc) -> m + acc).get();
         }
+
+        return messages;
     }
 }

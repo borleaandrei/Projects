@@ -14,36 +14,24 @@ public class Test {
 
                 try {
                     topics.publishMessage(new TopicMessage("7", "cotent1 from "+Thread.currentThread(), "topic1"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent2 from "+Thread.currentThread(), "topic1"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent3 from "+Thread.currentThread(), "topic1"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent4 from "+Thread.currentThread(), "topic1"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent5 from "+Thread.currentThread(), "topic2"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent6 from "+Thread.currentThread(), "topic2"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent7 from "+Thread.currentThread(), "topic2"));
-                    Thread.sleep(1000);
+                    Thread.sleep(500);
                     topics.publishMessage(new TopicMessage("7", "cotent8 from "+Thread.currentThread(), "topic2"));
-                    Thread.sleep(1000);
-
-                    int i = 0;
-
-                    while (i < 15) {
-                        System.out.println(topics.getMessages("topic", -1).toString());
-                        i++;
-                        Thread.sleep(500);
-                    }
-
-                    topics.stopTopicsVeirifcation();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-
             }
         });
 
@@ -52,33 +40,44 @@ public class Test {
             public void run() {
 
                 try {
-                    topics.publishMessage(new TopicMessage("7", "cotent1 from "+Thread.currentThread(), "topic1"));
+                    topics.publishMessage(new TopicMessage("10", "cotent11 from "+Thread.currentThread(), "topic1"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent2 from "+Thread.currentThread(), "topic1"));
+                    topics.publishMessage(new TopicMessage("10", "cotent22 from "+Thread.currentThread(), "topic1"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent3 from "+Thread.currentThread(), "topic1"));
+                    topics.publishMessage(new TopicMessage("10", "cotent33 from "+Thread.currentThread(), "topic1"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent4 from "+Thread.currentThread(), "topic1"));
+                    topics.publishMessage(new TopicMessage("10", "cotent44 from "+Thread.currentThread(), "topic1"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent5 from "+Thread.currentThread(), "topic2"));
+                    topics.publishMessage(new TopicMessage("10", "cotent55 from "+Thread.currentThread(), "topic2"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent6 from "+Thread.currentThread(), "topic2"));
+                    topics.publishMessage(new TopicMessage("10", "cotent66 from "+Thread.currentThread(), "topic2"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent7 from "+Thread.currentThread(), "topic2"));
+                    topics.publishMessage(new TopicMessage("10", "cotent77 from "+Thread.currentThread(), "topic2"));
                     Thread.sleep(700);
-                    topics.publishMessage(new TopicMessage("7", "cotent8 from "+Thread.currentThread(), "topic2"));
-                    Thread.sleep(700);
+                    topics.publishMessage(new TopicMessage("10", "cotent88 from "+Thread.currentThread(), "topic2"));
 
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
 
-                    int i = 0;
+        Thread showMessages = new Thread(new Runnable() {
+            @Override
+            public void run() {
+                int i = 0;
+
+                try {
 
                     while (i < 15) {
-                        System.out.println(topics.getMessages("topic", -1).toString());
+                        System.out.println(topics.getMessages("topic1", -1));
+                        System.out.println(topics.getMessages("topic2", -1));
                         i++;
-                        Thread.sleep(500);
+
+                        Thread.sleep(1000);
                     }
 
-                    topics.stopTopicsVeirifcation();
+                    topics.stopTopicsVerifcation();
 
                 } catch (InterruptedException e) {
                     e.printStackTrace();
@@ -89,7 +88,7 @@ public class Test {
 
         thread1.start();
         thread2.start();
-
+        showMessages.start();
 
     }
 }

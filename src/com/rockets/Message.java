@@ -37,6 +37,6 @@ public class Message {
     }
 
     public String toString() {
-        return header + ": " + content + "\n";
+        return "HEADER="+header + " ; CONTENT=" + content + "\n";
     }
 }
