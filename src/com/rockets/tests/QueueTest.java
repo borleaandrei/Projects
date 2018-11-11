@@ -33,13 +33,15 @@ public class QueueTest {
                 new Message("program1", "message2"),
                 new Message("program2", "message3"),
                 new Message("program2", "message4"),
-                new Message("program1", "message5"),
+                new Message("program2", "message5"),
                 new Message("program2", "message6"),
-                new Message("program3", "message7"),
+                new Message("program2", "message7"),
                 new Message("program1", "message8"),
                 new Message("program1", "message9"),
-                new Message("program3", "message10"),
-                new Message("program2", "message11")
+                new Message("program2", "message10"),
+                new Message("program2", "message11"),
+                new Message("program1", "message12"),
+                new Message("program1", "message13")
         );
 
         Broker broker = new Broker();
@@ -47,6 +49,9 @@ public class QueueTest {
             Receiver r = new Receiver(broker, m);
             new Thread(r).start();
         }
+
+        broker.send("program2");
+        broker.send("program2");
 
     }
 }
