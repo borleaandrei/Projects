@@ -44,7 +44,7 @@ public class Topics {
 
     public void publishMessage(TopicMessage message) {
         SynchronizedQueueImpl<TopicMessage> topic = topics.get(message.getTopic());
-        message.setExpirationTime(MAXIMUM_MESSAGE_LIFETIME);
+        message.setExpirationTime();
         //if the topic does not exist already, then we create it
         if (topic == null)
             synchronized (this) {

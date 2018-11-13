@@ -4,6 +4,8 @@ import com.rockets.Message;
 
 import java.time.LocalDateTime;
 
+import static com.rockets.topics.Topics.MAXIMUM_MESSAGE_LIFETIME;
+
 public class TopicMessage extends Message {
 
     private LocalDateTime expirationTime;
@@ -16,10 +18,10 @@ public class TopicMessage extends Message {
         return expirationTime;
     }
 
-    public void setExpirationTime(Long maxMessageLifeTime){
+    public void setExpirationTime(){
         long nrSeconds = Long.parseLong(getHeader());
-        if(nrSeconds > maxMessageLifeTime)
-            nrSeconds = maxMessageLifeTime;
+        if(nrSeconds > MAXIMUM_MESSAGE_LIFETIME)
+            nrSeconds = MAXIMUM_MESSAGE_LIFETIME;
 
         expirationTime = LocalDateTime.now().plusSeconds(nrSeconds);
     }
