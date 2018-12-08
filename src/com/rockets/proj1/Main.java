@@ -1,4 +1,4 @@
-package com.rockets;
+package com.rockets.proj1;
 
 public class Main {
 

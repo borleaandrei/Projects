@@ -1,7 +1,7 @@
-package com.rockets.tests;
+package com.rockets.proj1.tests;
 
-import com.rockets.Broker;
-import com.rockets.Message;
+import com.rockets.proj1.Broker;
+import com.rockets.proj1.Message;
 
 import java.util.Arrays;
 import java.util.List;

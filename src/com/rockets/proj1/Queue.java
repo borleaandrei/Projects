@@ -1,4 +1,6 @@
-package com.rockets;
+package com.rockets.proj1;
+
+import com.rockets.proj1.Message;
 
 import java.util.ArrayList;
 

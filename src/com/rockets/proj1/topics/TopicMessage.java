@@ -1,10 +1,10 @@
-package com.rockets.topics;
+package com.rockets.proj1.topics;
 
-import com.rockets.Message;
+import com.rockets.proj1.Message;
 
 import java.time.LocalDateTime;
 
-import static com.rockets.topics.Topics.MAXIMUM_MESSAGE_LIFETIME;
+import static com.rockets.proj1.topics.Topics.MAXIMUM_MESSAGE_LIFETIME;
 
 public class TopicMessage extends Message {
 

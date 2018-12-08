@@ -1,7 +1,6 @@
-package com.rockets;
+package com.rockets.proj1;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class Broker {
     private static int time = 150;       // max time to keep messages in queues

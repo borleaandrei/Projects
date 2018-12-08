@@ -1,4 +1,4 @@
-package com.rockets;
+package com.rockets.proj1;
 
 public class Message {
     private String header;      // message header, contains destination or timespan (in seconds) if topic is specified

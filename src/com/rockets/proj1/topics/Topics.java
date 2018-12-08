@@ -1,4 +1,7 @@
-package com.rockets.topics;
+package com.rockets.proj1.topics;
+
+import com.rockets.proj1.topics.SynchronizedQueueImpl;
+import com.rockets.proj1.topics.TopicMessage;
 
 import java.time.LocalDateTime;
 import java.util.*;

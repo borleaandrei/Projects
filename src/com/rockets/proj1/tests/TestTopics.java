@@ -1,7 +1,7 @@
-package com.rockets.tests;
+package com.rockets.proj1.tests;
 
-import com.rockets.topics.TopicMessage;
-import com.rockets.topics.Topics;
+import com.rockets.proj1.topics.TopicMessage;
+import com.rockets.proj1.topics.Topics;
 
 public class TestTopics {
 
